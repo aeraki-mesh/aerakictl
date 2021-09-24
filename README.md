@@ -2,7 +2,10 @@
 A shell script for Istio and Aeraki debugging.
 
 # Install
+
+```bash
 git clone https://github.com/aeraki-framework/aerakictl.git ~/aerakictl;source ~/aerakictl/aerakictl.sh
+```
 
 # Command
 ## Aeraki Debugging
