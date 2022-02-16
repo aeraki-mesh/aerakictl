@@ -2,6 +2,15 @@
 
 alias k=kubectl
 
+aerakictl_command_exist()
+{
+  if ! hash jq  2>/dev/null; then 
+    echo 'please install jq  https://stedolan.github.io/jq/download/'
+    return 1
+  fi
+  return 0
+}
+
 aerakictl_get_pod()
 { 
   if [ $# -eq 0 ]
@@ -138,8 +147,12 @@ aerakictl_sidecar_config()
 
 aerakictl_sidecar_route()
 {
+  if ! aerakictl_command_exist
+  then
+    return 1
+  fi
   output=`aerakictl_sidecar_config $@`
-  if [[ $output =~ ".*aeraki.meta_protocol_proxy.config.route.v1alpha.RouteConfiguration.*" ]]
+  if [[ $output =~ .*aeraki.meta_protocol_proxy.config.route.v1alpha.RouteConfiguration.* ]]
   then
     aerakictl_sidecar_config $@|jq '.configs[4]'
   else

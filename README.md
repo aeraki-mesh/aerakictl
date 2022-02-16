@@ -9,7 +9,6 @@ git clone https://github.com/aeraki-framework/aerakictl.git ~/aerakictl;source ~
 
 Note: please install the below dependencies:
 * jq https://stedolan.github.io/jq/download/
-* fx https://github.com/antonmedv/fx
 
 # Command
 ## Aeraki Debugging
