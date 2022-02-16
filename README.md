@@ -27,7 +27,8 @@ Note: please install the below dependencies:
 * aerakictl_gateway_log 
 ## Sidecar Debugging             
 * aerakictl_sidecar_log                 
-* aerakictl_sidecar_config               
+* aerakictl_sidecar_config   
+* aerakictl_sidecar_route            
 * aerakictl_sidecar_stats
 * aerakictl_sidecar_enable_debug
 * aerakictl_sidecar_enable_trace
