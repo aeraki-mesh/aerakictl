@@ -136,6 +136,17 @@ aerakictl_sidecar_config()
   fi
 }
 
+aerakictl_sidecar_route()
+{
+  output=`aerakictl_sidecar_config $@`
+  if [[ $output =~ ".*aeraki.meta_protocol_proxy.config.route.v1alpha.RouteConfiguration.*" ]]
+  then
+    aerakictl_sidecar_config $@|jq '.configs[4]'
+  else
+    echo $output
+  fi
+}
+
 aerakictl_sidecar_enable_trace()
 {
   if [ $# -eq 0 ]

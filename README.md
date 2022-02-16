@@ -7,6 +7,10 @@ A shell script for Istio and Aeraki debugging.
 git clone https://github.com/aeraki-framework/aerakictl.git ~/aerakictl;source ~/aerakictl/aerakictl.sh
 ```
 
+Note: please install the below dependencies:
+* jq https://stedolan.github.io/jq/download/
+* fx https://github.com/antonmedv/fx
+
 # Command
 ## Aeraki Debugging
 * aerakictl_aeraki_log   
