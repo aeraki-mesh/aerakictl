@@ -137,9 +137,9 @@ aerakictl_sidecar_config()
     else
       if [ $# -eq 1 ]
       then
-        k exec $pod -c istio-proxy -- curl "127.0.0.1:15000/config_dump?include_eds"
+        k exec $pod -c istio-proxy -- curl "127.0.0.1:15000/config_dump"
       else
-        k exec $pod -c istio-proxy -n $2 -- curl "127.0.0.1:15000/config_dump?include_eds"
+        k exec $pod -c istio-proxy -n $2 -- curl "127.0.0.1:15000/config_dump"
       fi
     fi
   fi
@@ -246,7 +246,7 @@ aerakictl_sidecar_admin()
 
 aerakictl_sidecar_stats()
 {
-  aerakictl_sidecar_admin consumer metaprotocol /stats/prometheus
+  aerakictl_sidecar_admin $1 $2 /stats/prometheus
 }
 
 aerakictl_sidecar_log()
@@ -355,7 +355,7 @@ aerakictl_gateway_config()
     echo $pod
     return 1
   else
-    k exec $pod -c istio-proxy -n istio-system -- curl 127.0.0.1:15000/config_dump
+    k exec $pod -c istio-proxy -n istio-system -- curl "127.0.0.1:15000/config_dump?include_eds"
   fi
 }
 
@@ -396,7 +396,7 @@ aerakictl_dangerous_delete_istiod_pod()
     echo $pod
     return 1
   else
-    k delete pod $pod -n istio-system
+    k delete pod $pod -n istio-system --force --grace-period=0
   fi
 }
 
@@ -408,7 +408,7 @@ aerakictl_dangerous_delete_aeraki_pod()
     echo $pod
     return 1
   else
-    k delete pod $pod -n istio-system
+    k delete pod $pod -n istio-system --force --grace-period=0
   fi
 }
 
@@ -438,9 +438,9 @@ aerakictl_dangerous_delete_pod()
     else
       if [ $# -eq 1 ]
       then
-        k delete po $pod
+        k delete po $pod --force --grace-period=0
       else
-        k delete po $pod -n $2
+        k delete po $pod -n $2 --force --grace-period=0
       fi
     fi
   fi
