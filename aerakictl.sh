@@ -71,7 +71,7 @@ aerakictl_istiod_config()
     echo $pod
     return 1
   else
-    k exec $pod -n istio-system -- curl http://127.0.0.1:15014/debug/configz
+    k exec -it $pod -n istio-system -- curl http://127.0.0.1:15014/debug/configz
   fi
 }
 
@@ -137,9 +137,9 @@ aerakictl_sidecar_config()
     else
       if [ $# -eq 1 ]
       then
-        k exec $pod -c istio-proxy -- curl "127.0.0.1:15000/config_dump"
+        k exec -it $pod -c istio-proxy -- curl "127.0.0.1:15000/config_dump"
       else
-        k exec $pod -c istio-proxy -n $2 -- curl "127.0.0.1:15000/config_dump"
+        k exec -it $pod -c istio-proxy -n $2 -- curl "127.0.0.1:15000/config_dump"
       fi
     fi
   fi
@@ -355,7 +355,7 @@ aerakictl_gateway_config()
     echo $pod
     return 1
   else
-    k exec $pod -c istio-proxy -n istio-system -- curl "127.0.0.1:15000/config_dump?include_eds"
+    k exec -it $pod -c istio-proxy -n istio-system -- curl "127.0.0.1:15000/config_dump?include_eds"
   fi
 }
 
